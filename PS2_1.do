@@ -30,7 +30,7 @@ l ghjb, sepby(Sourcecountry)
 l Sourcecountry ghjb, sepby(ghjb)
 l Sourcecountry ghjb, sepby(ghjb) clean
 
-collapse Capitalinvestment, by(Projectdate)
+collapse Capitalinvestment, by(Projectdate) //could save on hd before and after collapsing
 
 import excel "https://docs.google.com/uc?id=15ZBiYkdVF_U65_tWdWVACcSfpqe0OWQt&export=download",clear first
 keep Projectdate Jobscreated Capitalinvestment
@@ -39,7 +39,7 @@ recode Projectdate () /// not sure, how to recode it inoder to be able to collap
 collapse Projectdate, by (Jobscreated) /// I tried this but did not give me what I wanted
 
 
-
+//whats the source?
 **** clearing to upload the GDP dataset 
 clear
 use "https://docs.google.com/uc?id=1fHMlhGZqQWNH5eO5abPwQe2nXMw72N-u&export=download" , clear
@@ -52,7 +52,9 @@ drop GDPpercapitagrowthannual
 
 la var GCF "Gross capital formation (% of GDP)"
 la var GDPG "GDP growth  (annual %)"
-la var GDP_act "GDP (current US$)"
+la var GDP_act "GDP (current US$)" //good; btw why not doing stuff like this on first one?
+//did you already clean the first one earlier in excel?
+//then do it again, start from scratch in stata and do cleanig properly in stata on first data set
 
 egen avg_GDP_act= mean(GDP_act)
 
@@ -66,7 +68,7 @@ order SeriesName
 
 
 
-
+//there is no merging
 
 
 
