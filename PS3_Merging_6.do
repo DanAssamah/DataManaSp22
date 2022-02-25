@@ -1,3 +1,5 @@
+
+
 ** DATA MANAGEMENT CLASS 
 ** PS3 DOFILE
 ** Daniel Assamah, Spring 2022
@@ -69,6 +71,9 @@ keep SeriesName GCF lGDP sGDP
 aorder
 order SeriesName
 
+//typically want to load data, fix it up and clean and make pretty etc and then save on hd; and only then merge; but you load it fix itup, dont save; and merge
+//data from online that are not ready
+
 ** Merging*****
 import excel "https://docs.google.com/uc?id=15ZBiYkdVF_U65_tWdWVACcSfpqe0OWQt&export=download",clear first
 rename Projectdate Years
@@ -100,15 +105,19 @@ save fgdp, replace // saves the first merge of FDI data from FDI Market Place an
 import excel "https://docs.google.com/uc?id=1WQnOwyTj_vpgQncyvUwbaqPbeNyU6QuP&export=download", sheet ("Country") clear
 edit
 drop B-CD // drops all the years we dont need. From 1972 to 2003
-keep in 1/75
+keep in 1/75 //no! much better keep and drop on some condition say drop if country == "USA" | country =="MEX" etc 
 drop in 4/70
 keep in 1/4
 drop CE-CM
+
+//this may be fine but ideally could figure out something more bullet proof that would replace autmatically var names with first row of data
+//https://www.google.com/search?client=firefox-b-1-d&q=stata+rename+varioables+to+first+row+of+data
 rename ( CP CS CV CY DB DE DH DK DN DQ  DT DW DZ EC EF EI EL EO) (Yr2003 Yr2004 Yr2005 Yr2006 Yr2007 Yr2008 Yr2009 Yr2010 Yr2011 Yr2012 Yr2013 Yr2014 Yr2015 Yr2016 Yr2017 Yr2018 Yr2019 Yr2020)
+
 keep A Yr2003 Yr2004 Yr2005 Yr2006 Yr2007 Yr2008 Yr2009 Yr2010 Yr2011 Yr2012 Yr2013 Yr2014 Yr2015 Yr2016 Yr2017 Yr2018 Yr2019 Yr2020
 drop in 1/2
 rename A Country
-replace Country = "" in 2
+replace Country = "" in 2  //again! avoid in operations, much safer to do if operations!
 replace Country = "Ghana" in 1
 reshape long Yr, i(Country)j(Year)
 rename Yr Status
@@ -136,7 +145,7 @@ edit
 drop sdg_ind location v6 flagcode flags
 reshape wide value, i(indicator) j(time) // to reshape the data into wide. but we are still not there yet, I need to reshape it again. But before that, I need to rename the first column so they can take on a variable name
 replace indicator = "CR_BSEX" in 1
-replace indicator = "CR_F" in 2
+replace indicator = "CR_F" in 2 //again same thing! avoid in!!! better do if
 replace indicator = "CR_M" in 3
 replace indicator = "CR_RBSEX" in 4
 replace indicator = "CR_RF" in 5
@@ -169,6 +178,7 @@ rename year Year
 rename value CR_M
 save CR_M, replace
 
+//no!!! this is not 1:m but 1:1 and same below!!
 merge 1:m Year using EFfgdp // added the completion rate by males to the dataset
 drop _merge
 
