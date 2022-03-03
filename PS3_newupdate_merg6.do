@@ -127,6 +127,43 @@ drop _merge
 save fgdpALL, replace  // saving all wholistic dataset
 
 
+/* a way to ren with yr and cl or pr
+import excel "https://docs.google.com/uc?id=1WQnOwyTj_vpgQncyvUwbaqPbeNyU6QuP&export=download", sheet ("Country") clear //firstr
+
+
+
+//replace A = "Year" in 2
+//replace A = "Freedom" in 3
+drop B-CM // drops all the years we dont need. From 1972 to 2003
+//keep if inlist(A, "Year", "Ghana")
+
+drop in 1
+
+edit
+
+foreach v of varlist *{
+if `v'[1] !=""{
+loc i=`v'[1] 
+di "`i'"
+
+}
+replace `v' in 1="`i'" 
+}
+
+//loc yr="empty"
+//foreach v of varlist *{
+//replace `v'="`yr'" in 1
+//loc yr=`v'[1]
+// }
+
+foreach v of varlist *{
+loc nam = strtoname(`v'[2]+`v'[1])
+di "`nam'"
+ren `v' `nam'
+}
+*/
+
+
 ** FREEDOM HOUSE DATA**********
 
 	// Data was extracted from the Freedom House dataset. 
@@ -134,7 +171,7 @@ save fgdpALL, replace  // saving all wholistic dataset
 * Data Interpretaton: Until 2003, countries and territories whose combined average ratings for PR and CL fell between 1.0 and 2.5 were designated Free; between 3.0 and 5.5 Partly Free, and between 5.5 and 7.0 Not Free. Beginning with the ratings for 2003, countries whose combined average ratings fall between 3.0 and 5.0 are Partly Free, and those between 5.5 and 7.0 are Not Free. 
 *the URL for this data source: https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Ffreedomhouse.org%2Fsites%2Fdefault%2Ffiles%2F2021-02%2FCountry_and_Territory_Ratings_and_Statuses_FIW1973-2021.xlsx&wdOrigin=BROWSELINK
 
-import excel "https://docs.google.com/uc?id=1WQnOwyTj_vpgQncyvUwbaqPbeNyU6QuP&export=download", sheet ("Country") clear
+import excel "https://docs.google.com/uc?id=1WQnOwyTj_vpgQncyvUwbaqPbeNyU6QuP&export=download", sheet ("Country") clear firstr
 edit
 replace A = "Year" in 2
 replace A = "Freedom" in 3
