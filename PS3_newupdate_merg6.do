@@ -1,7 +1,7 @@
 ** DATA MANAGEMENT CLASS 
 ** PS3 DOFILE
 ** Daniel Assamah, Spring 2022
-** Stata 16
+** Stata 16 
 
 *..............................................................................
 *..............................................................................
@@ -15,7 +15,7 @@
 
 clear         
 set matsize 800 
-version 14
+version 14 //you say stata14 earlier
 set more off
 
 
@@ -120,7 +120,7 @@ save fgdps, replace // saves the first merge of FDI data from FDI Market Place a
 
 ***1:m merging***
 clear
-sysuse WBGDP
+sysuse WBGDP //no just say use
 merge 1:m Year using FDial.dta // This merge is with the detailed dataset, where the unit of analysis is companies.
 gsort Year
 drop _merge
@@ -171,7 +171,7 @@ ren `v' `nam'
 * Data Interpretaton: Until 2003, countries and territories whose combined average ratings for PR and CL fell between 1.0 and 2.5 were designated Free; between 3.0 and 5.5 Partly Free, and between 5.5 and 7.0 Not Free. Beginning with the ratings for 2003, countries whose combined average ratings fall between 3.0 and 5.0 are Partly Free, and those between 5.5 and 7.0 are Not Free. 
 *the URL for this data source: https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Ffreedomhouse.org%2Fsites%2Fdefault%2Ffiles%2F2021-02%2FCountry_and_Territory_Ratings_and_Statuses_FIW1973-2021.xlsx&wdOrigin=BROWSELINK
 
-import excel "https://docs.google.com/uc?id=1WQnOwyTj_vpgQncyvUwbaqPbeNyU6QuP&export=download", sheet ("Country") clear firstr
+import excel "https://docs.google.com/uc?id=1WQnOwyTj_vpgQncyvUwbaqPbeNyU6QuP&export=download", sheet ("Country") clear firstr //if you do firstr, then there is no var A as you replace below
 edit
 replace A = "Year" in 2
 replace A = "Freedom" in 3
