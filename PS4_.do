@@ -1,3 +1,11 @@
+/*
+nice graph capital investment and jobs created
+very nice graph on where investment come from
+
+again, dont do pie charts; do bar graphs instead
+and would be useful to have a graph side by side breakdown by industry for each counrty
+*/
+
 ** DATA MANAGEMENT CLASS 
 ** PS3 DOFILE
 ** Daniel Assamah, Spring 2022
