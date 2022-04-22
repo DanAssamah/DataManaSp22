@@ -1,3 +1,12 @@
+//overall very nice clear structure
+
+//in general the limitation is structure of the data and lack of the data at country level: you have plenty of data at firm level, like hundreds
+//but only a handful of yerars at country level, so cannot really figure out much from that--too few obs at country level, just a handful
+//there are several ways to improve: add more countries, say all african countries; or look by region/province within ghana, so that have more variability--
+//then the data that you would merge would not come from intl institutions like world bank, but rather from Ghanian government;; its not necessarily that
+//you have to do it that way for this class, but in general for the future research
+
+
 ** DATA MANAGEMENT CLASS 
 ** PS3 DOFILE
 ** Daniel Assamah, Spring 2022
@@ -18,6 +27,9 @@ set more off
 /* Research Topic**/
 /******************/
 
+
+//good to have lots of comments here
+
 //*********************GREENFIELD INVESTMENT AND JOB CREATION IN GHANA********//
 
 ***EXTENDED ABSTRACT******
@@ -26,6 +38,8 @@ set more off
 
 Research Question 
 1.	Does greenfield investment in Ghana lead to significant job creation in the formal sector?
+
+//good clear hypotheses
 
 Hypothesis 
 	Ho: Greenfield investments does not have any significant impact positive impact
@@ -43,6 +57,8 @@ Hypothesis
 /*********************************/
 /* Data Description & Sources ****/
 /*********************************/
+
+//very good description of data
 
 /*DATA FROM FDI MARKET PLACE******
 Data on FDI capital investment and jobs created were extracted in 2021 from the FDI Market Place database. FDI Market Place is a closed database owned by the Financial Times in London, and you need a subscription to access it. I gained access through the Cornel Library in 2020
@@ -257,7 +273,7 @@ destring Judieff Fishth Laborfr, replace
 drop name
 save heritage, replace
 
-merge m:m Year using Ghainv
+merge m:m Year using Ghainv //i've never seen m:m in my life! think if rather you need 1:1 or m:1 or 1:m
 drop _merge
 save Ghainvest, replace //**// FDI + GDP + Freedom + Education + Inflation + Population + Heritage data//**//
 
